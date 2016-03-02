@@ -1,6 +1,6 @@
-package com.example.test.client;
+package com.example.client;
 
-import com.example.test.service.RestServer;
+import com.example.service.RestServer;
 import net.thucydides.core.reports.adaptors.specflow.ScenarioSplitter;
 
 /**

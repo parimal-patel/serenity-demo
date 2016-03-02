@@ -1,7 +1,7 @@
-package com.example.test.jbehave;
+package com.example.steps;
 
+import com.example.steps.serenity.ServerSteps;
 import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.steps.ScenarioSteps;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -9,10 +9,11 @@ import org.jbehave.core.annotations.When;
 /**
  * Created by parimal.patel on 24/02/16.
  */
-public class FileUploadSteps{
+public class FileUploadSteps {
     private static final String UPLOAD_ENDPOINT = "upload";
 
-    ServerSteps server = new ServerSteps();
+    @Steps
+    ServerSteps server;
 
     @Given("a REST Client and REST Server")
     public void givenARESTClientAndRESTServer() {

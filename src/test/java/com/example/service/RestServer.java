@@ -1,4 +1,4 @@
-package com.example.test.service;
+package com.example.service;
 
 import net.thucydides.core.reports.adaptors.specflow.ScenarioSplitter;
 

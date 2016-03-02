@@ -1,8 +1,9 @@
-package com.example.test.jbehave;
+package com.example.steps.serenity;
 
-import com.example.test.client.RestClient;
-import com.example.test.service.RestServer;
-import com.example.test.queue.Queue;
+import com.example.client.RestClient;
+import com.example.service.RestServer;
+import com.example.queue.Queue;
+import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
 import static org.junit.Assert.assertEquals;
@@ -17,26 +18,31 @@ public class ServerSteps extends ScenarioSteps{
     Queue queue;
     private boolean fileReceived;
 
+    @Step
     public void initialize() {
         client = new RestClient();
         server = new RestServer();
         queue = new Queue();
     }
 
+    @Step
     public void endpoint_called_by_client(String uploadEndpoint) {
         client.calls(uploadEndpoint, server);
     }
 
+    @Step
     public void receivefile() {
         fileReceived = true;
     }
 
+    @Step
     public void add_log_in_database_and_syslog() {
         System.out.println("Inserted 1 record in DB for receiving a file");
         System.out.println("Received a file");
         assertTrue(fileReceived);
     }
 
+    @Step
     public void pushes_file_to_queue() {
         queue.push("FileObject");
         assertEquals(queue.size(), 1);
