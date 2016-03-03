@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -46,5 +47,27 @@ public class ServerSteps extends ScenarioSteps{
     public void pushes_file_to_queue() {
         queue.push("FileObject");
         assertEquals(queue.size(), 1);
+    }
+
+    @Step
+    public void checkIfFileIsAvailable() {
+        assertTrue(fileReceived);
+        try {
+            Thread.currentThread().sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Step
+    public void publishMessage(String topic) {
+        System.out.println("Publishing message to " + topic);
+    }
+
+    @Step
+    public void fetchMessageFromQueue() {
+        Object object = queue.fetch();
+        assertNotNull(object);
+        System.out.println("object = " + object);
     }
 }

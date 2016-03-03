@@ -9,3 +9,8 @@ When the REST Client calls file uploader endpoint on REST Server
 Then the server should receive the file
 And log entry is added in the database and syslog
 And the file is pushed to the queue
+
+Scenario: File Publish to Queue
+Given the file content is available in the queue
+When the message is fetched from the queue
+Then publish the message to the topic 'abc'
