@@ -17,7 +17,8 @@ public class FilePublishSteps {
 
     @Given("the file content is available in the queue")
     public void givenTheFileContentIsAvailableInTheQueue() {
-        server.checkIfFileIsAvailable();
+        server.receivefile();
+        server.pushes_file_to_queue();
     }
 
     @When("the message is fetched from the queue")

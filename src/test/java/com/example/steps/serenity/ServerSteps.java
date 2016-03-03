@@ -3,6 +3,7 @@ package com.example.steps.serenity;
 import com.example.client.RestClient;
 import com.example.service.RestServer;
 import com.example.queue.Queue;
+import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
@@ -45,15 +46,16 @@ public class ServerSteps extends ScenarioSteps{
 
     @Step
     public void pushes_file_to_queue() {
+        int queueSizeBefore = queue.size();
         queue.push("FileObject");
-        assertEquals(queue.size(), 1);
+        assertEquals(queue.size(), queueSizeBefore + 1);
     }
 
     @Step
     public void checkIfFileIsAvailable() {
         assertTrue(fileReceived);
         try {
-            Thread.currentThread().sleep(10000);
+            Thread.currentThread().sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -66,8 +68,24 @@ public class ServerSteps extends ScenarioSteps{
 
     @Step
     public void fetchMessageFromQueue() {
-        Object object = queue.fetch();
-        assertNotNull(object);
-        System.out.println("object = " + object);
+        Object message = queue.fetch();
+        assertNotNull(message);
+        Serenity.setSessionVariable("message").to(message);
+        System.out.println("object = " + message);
+    }
+
+    @Step
+    public void subscribesTopic(String topic) {
+        System.out.println("Subscribed topic: " + topic);
+    }
+
+    @Step
+    public void receivesMessageFromTopic(String topic) {
+        System.out.println("Received Message: " + Serenity.sessionVariableCalled("message").toString());
+    }
+
+    @Step
+    public void logsTheMessage() {
+        System.out.println("Log: " + Serenity.sessionVariableCalled("message"));
     }
 }

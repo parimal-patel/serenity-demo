@@ -16,9 +16,7 @@ public class FileUploadSteps {
     ServerSteps server;
 
     @Given("a REST Client and REST Server")
-    public void givenARESTClientAndRESTServer() {
-        server.initialize();
-    }
+    public void givenARESTClientAndRESTServer() { server.initialize(); }
 
     @When("the REST Client calls file uploader endpoint on REST Server")
     public void whenTheRESTClientCallsFileUploaderEndpointOnRESTServer() {

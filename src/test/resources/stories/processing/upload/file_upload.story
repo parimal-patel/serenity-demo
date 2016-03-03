@@ -14,3 +14,8 @@ Scenario: File Publish to Queue
 Given the file content is available in the queue
 When the message is fetched from the queue
 Then publish the message to the topic 'abc'
+
+Scenario: File Subscribe and Process
+Given the topic 'abc' is subscribed
+When the message is received from topic 'abc'
+Then log the receipt of the message
